@@ -1,176 +1,166 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using System.Configuration;
+using System.Web.UI.WebControls;
+using System.Web.UI;
+using System.Web;
 
 namespace InfoBridgeAssignment
 {
     public partial class Employee : System.Web.UI.Page
     {
-        //Connection server
+
+
         string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\Practice\InfoBridgeAssignment\InfoBridgeAssignment\App_Data\Mydatabase.mdf;Integrated Security=True";
-        //SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Mydatabase.mdf;Integrated Security=True");
+        SqlConnection con;
+        SqlCommand cmd;
+        SqlDataAdapter adapter;
+        DataTable dt;
 
 
+        public void Data_Load()
+        {
+            if(IsPostBack) {
+                dgViewEmployee.DataBind(); 
+            }
+        }
+
+        public void Clear_All()
+        {
+            txtId.Text = "";
+            txtName.Text = "";
+            drpSex.SelectedValue = drpSex.Items[0].ToString();
+            txtPhone.Text = "";
+            txtDateOfBirth.Text=DateTime.Today.Date.ToString();
+            lblMessage.Text = "";
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
+            SqlCommand cmd = new SqlCommand(connectionString);
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lblId.Text = dgViewEmployee.SelectedRow.Cells[1].Text;
+            txtName.Text = dgViewEmployee.SelectedRow.Cells[2].Text;
+            drpSex.Text = dgViewEmployee.SelectedRow.Cells[3].Text;
+            txtName.Text = dgViewEmployee.SelectedRow.Cells[4].Text;
+            txtPhone.Text= dgViewEmployee.SelectedRow.Cells[5].Text;
+            txtDateOfBirth.Text = dgViewEmployee.SelectedRow.Cells[6].Text;
+            //FileUpload1. = dgViewEmployee.SelectedRow.Cells[7].Text;
+
         }
 
         //Add Employee
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-
-
             try
             {
-                using (SqlConnection con = new SqlConnection(connectionString))
+                if (txtName.Text != "" && txtPhone.Text != "")
                 {
-                    if (FileUpload1.HasFile)
+                    using (con = new SqlConnection(connectionString))
                     {
                         con.Open();
-                        string query = "Insert into Employee(Id,Name,DateOfBirth,Sex,Phone,Image) values(@Id,@Name,@DateOfBirth,@Sex,@Phone,@Image)";
-                        SqlCommand cmd = new SqlCommand(query, con);
-                        string path = Path.GetFileName(FileUpload1.FileName);
-                        path = path.Replace(" ", "");
-                        String filename1 = path;
-                        FileUpload1.SaveAs(Server.MapPath("~/EmployeeImg/") + path);
-                        //Label3.Text = "Image Uploaded and Saved in Server Successfully";
-                        //FileUpload1.SaveAs(Server.MapPath("~/EmployeeImg/") + System.IO.Path.GetFileName(FileUpload1.FileName));
-                        //string linkpath = "EmployeeImg/" + System.IO.Path.GetFileName(FileUpload1.FileName);
+                        cmd = new SqlCommand("Insert into Employee(Id,Name,DateOfBirth,Sex,Phone,Image) " +
+                            "values(@Id,@Name,@DateOfBirth,@Sex,@Phone,@Image)", con);
+                        FileUpload1.SaveAs(Server.MapPath("~/EmployeeImg/") + System.IO.Path.GetFileName(FileUpload1.FileName));
+                        string linkpath = "EmployeeImg/" + System.IO.Path.GetFileName(FileUpload1.FileName);
                         cmd.Parameters.AddWithValue("@Id", txtId.Text);
                         cmd.Parameters.AddWithValue("@Name", txtName.Text);
                         cmd.Parameters.AddWithValue("@DateOfBirth", txtDateOfBirth.Text);
                         cmd.Parameters.AddWithValue("@Sex", drpSex.Text);
                         cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
-                        cmd.Parameters.AddWithValue("@Image", path);
+                        cmd.Parameters.AddWithValue("@Image", linkpath);
 
                         cmd.ExecuteNonQuery();
                         con.Close();
+                        Clear_All();
                     }
-
+                    MessageBox.Show("Record Added Successfully..");
                 }
-                //object MessageBox = null;
-                MessageBox.Show("Add Sucessful!");
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex + "Error:Record not added");
-            }
-            // Display_Data();
-        }
-        //public void Display_Data()
-        //{
-        //    using (SqlConnection con = new SqlConnection(connectionString))
-        //    {
-        //        SqlCommand cmd = con.CreateCommand();
-        //        cmd.CommandType = CommandType.Text;
-        //         con.Open();
-        //        cmd.CommandText = "select * from Employee";
-        //        cmd.ExecuteNonQuery();
-        //        con.Close() ;
-
-        //        DataTable dt = new DataTable();
-        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //        da.Fill(dt);
-        //        GridView1.DataSource = dt;
-        //        GridView1.DataBind();
-        //        con.Close();
-        //    }
-        //}
-
-        protected void btnView_Click(object sender, EventArgs e)
-        {
-            // Display_Data();
-            try
-            {
-                int recordIdToView;
-                if(int.TryParse(txtId.Text,out recordIdToView))
+                else
                 {
-                    using(SqlConnection con =new SqlConnection(connectionString))
-                    {
-                        string query = "select Id,Name,DateOfBirth,Sex,Phone,Image from  Employee where Id=@Id";
-                        using(SqlDataAdapter da=new SqlDataAdapter(query, con))
-                        {
-                            da.SelectCommand.Parameters.AddWithValue("@Id", recordIdToView);
-                            DataTable dt = new DataTable();
-                            da.Fill(dt);
-                            GridView1.DataSource = dt;
-                            GridView1.DataBind();
-                        }
-                    }
+                    lblMessage.Text = "Fill All Information";
                 }
+
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex + "Record Not Found");
+                MessageBox.Show(ex.Message);
             }
+            
+        } 
+        
+
+        protected void btnView_Click(object sender, EventArgs e)
+        {
+            Data_Load();
+
 
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int recordId = Convert.ToInt32(txtId.Text);
-                using (SqlConnection con = new SqlConnection(connectionString))
+            try {
+                if (txtName.Text != "" && txtPhone.Text != "")
                 {
-                    string qry = "update Employee set Name=@Name,DateOfBirth=@DateOfBirth,Sex=@Sex,Phone=@Phone,Image=@Image " +
-                        "where Id=@Id";
-                    SqlCommand cmd = new SqlCommand(qry, con);
-                    cmd.Parameters.AddWithValue("@Id", recordId);
-
-                    cmd.Parameters.AddWithValue("@Name", txtName.Text);
-                    cmd.Parameters.AddWithValue("@DateOfBirth", txtDateOfBirth.Text);
-                    cmd.Parameters.AddWithValue("@Sex", drpSex.Text);
-                    cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
-                    cmd.Parameters.AddWithValue("@Image", FileUpload1.FileName);
-
-                    con.Open();
-                    int res = cmd.ExecuteNonQuery();
-                    con.Close();
-                    if (res > 0)
+                    using (con = new SqlConnection(connectionString))
                     {
-                        MessageBox.Show("Record Edit Successfully..");
+                        con.Open();
+                        cmd = new SqlCommand("Update Employee set Name=@Name,DateOfBirth=@DateOfBirth,Sex=@Sex,Phone=@Phone," +
+                            "Image=@Image where Id=@Id", con);
+
+                        FileUpload1.SaveAs(Server.MapPath("~/EmployeeImg/") + System.IO.Path.GetFileName(FileUpload1.FileName));
+                        string linkpath = "EmployeeImg/" + System.IO.Path.GetFileName(FileUpload1.FileName);
+
+                        cmd.Parameters.AddWithValue("@Name", txtName.Text);
+                        cmd.Parameters.AddWithValue("@DateOfBirth", txtDateOfBirth.Text);
+                        cmd.Parameters.AddWithValue("@Sex", drpSex.Text);
+                        cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
+                        cmd.Parameters.AddWithValue("@Image", linkpath);
+                        cmd.Parameters.AddWithValue("@Id", lblId.Text);
+
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        Clear_All();
                     }
-
+                    MessageBox.Show("Record Updated...");
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex + "Error:Record not Found");
-            }
-        }
+                else
+                {
+                    lblMessage.Text = "Error";
+                }
 
+
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+         }
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                int recordIdToDelete = Convert.ToInt32(txtId.Text);
-                using (SqlConnection con = new SqlConnection(connectionString))
+                using (con = new SqlConnection(connectionString))
                 {
-                    string qry = "delete from Employee where Id=@Id";
-                    SqlCommand cmd = new SqlCommand(qry, con);
-                    cmd.Parameters.AddWithValue("@Id", recordIdToDelete);
                     con.Open();
-                    int res = cmd.ExecuteNonQuery();
-                    if (res > 0)
-                    {
-                        MessageBox.Show("Record Deleted..");
-                    }
+
+                    cmd = new SqlCommand("delete from Employee where Id=@Id", con);
+                    cmd.Parameters.AddWithValue("@Id", lblId.Text);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    Clear_All();
 
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex + "Record Not Found");
+                MessageBox.Show(ex.Message);
             }
         }
     }

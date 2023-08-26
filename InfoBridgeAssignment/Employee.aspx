@@ -4,22 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>EMPLOYEE FROM</title>
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-          function ImagePreview(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#<%=Image1.ClientID%>').prop('src', e.target.result)
-                        .width(200)
-                        .height(200);
-                };
-                reader.readAsDataURL(input.files[0]);
-                }
-            }
-
-    </script>
+    <title>EMPLOYEE FORM</title>
+    
 
     <style type="text/css">
         .tdLable
@@ -129,21 +115,33 @@
             <table style="background-color:#D3D3D3;" class="auto-style3">
                 <tr>
                     <td width="20%">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:Image ID="Image1" runat="server" />
-                    </td>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:GridView ID="dgViewEmployee" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" Width="508px" AllowPaging="True" AllowSorting="True" DataSourceID="SqlDataSource1" Height="539px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Visible="False">
+                                        <Columns>
+                                            <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
+                                            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                                            <asp:BoundField DataField="DateOfBirth" HeaderText="DateOfBirth" SortExpression="DateOfBirth" DataFormatString="{0:dd/MM/yyyy}" />
+                                            <asp:BoundField DataField="Sex" HeaderText="Sex" SortExpression="Sex" />
+                                            <asp:BoundField DataField="Phone" HeaderText="Phone" SortExpression="Phone" />
+                                            <asp:BoundField DataField="Image" HeaderText="Image" SortExpression="Image" />
+                                        </Columns>
+                                    </asp:GridView>    
+                                    </td>
                     <td ;valign="top" class="auto-style1">
                         <table style="border:1px solid #3498DB;" class="auto-style4">
                             <tr>
                                 <td colspan="2" style="background-color:#3498DB;text-align:center;color:white;
-                                   font-size:24px;font-weight:bold;height:50px;">Employee From</td>
+                                   font-size:24px;font-weight:bold;height:50px;">Employee Form</td>
                             </tr>
                             <tr>
-                                <td colspan="2" style="height:10px"></td>
-                            </tr>
-                            <tr>
-                                <td width="30%" class="tdLable">
-                                    Id :<span style="color:red;">*</span>
+                                <td colspan="2" style="height:10px">
+                                    <asp:Label ID="lblMessage" runat="server" ForeColor="#CC0000"></asp:Label>
+                                    <asp:Label ID="lblId" runat="server" Visible="False"></asp:Label>
                                 </td>
+                            </tr>
+                            <tr>
+                                <td width="30%" class="tdLable" >
+                                   <asp:Label runat="server"> Id :   <span style="color:red;">*</span>                             </asp:Label>
+                                       </td>
                                 <td class="auto-style2" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF; border-top-style: groove; border-top-width: medium; border-top-color: #FFFFFF;">
                                     <asp:TextBox ID="txtId" runat="server" Width="253px" ></asp:TextBox>
                                 </td>
@@ -164,10 +162,10 @@
                                 </td>
                                 <td class="auto-style8" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF">
                                     <asp:DropDownList ID="drpSex" runat="server">
-                                        <asp:ListItem Value="-1" Text="--Select Gender--" ></asp:ListItem>
-                                        <asp:ListItem Value="1" Text="Male" ></asp:ListItem>
-                                        <asp:ListItem Value="2" Text="Female" ></asp:ListItem>
-                                        <asp:ListItem Value="3" Text="Other" ></asp:ListItem>
+                                        <asp:ListItem Text="--Select Gender--" ></asp:ListItem>
+                                        <asp:ListItem Value="Male" Text="Male" ></asp:ListItem>
+                                        <asp:ListItem Value="Female" Text="Female" ></asp:ListItem>
+                                        <asp:ListItem Value="Other" Text="Other" ></asp:ListItem>
 
                                     </asp:DropDownList>
                                     </td>
@@ -188,8 +186,7 @@
                                 </td>
                                 <td class="auto-style6" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF">
                                     <asp:TextBox ID="txtDateOfBirth" runat="server" Type="date" Width="147px" Height="17px"></asp:TextBox>
-                                    <%--<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/calander.jpg" ImageAlign="AbsBottom" Height="22px" Width="25px" onclick="ImageButton1_Click" />--%>
-                                    <%--<asp:Calendar ID="Calendar1" runat="server" Height="200px" Width="220px" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="#003399" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender">
+                                    <%--<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/calander.jpg" ImageAlign="AbsBottom" Height="22px" Width="25px" onclick="ImageButton1_Click" />--%><%--<asp:Calendar ID="Calendar1" runat="server" Height="200px" Width="220px" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="#003399" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender">
                                         <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
                                         <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
                                         <OtherMonthDayStyle ForeColor="#999999" />
@@ -212,7 +209,7 @@
                                     </td>
                                 </tr>
                             <tr>
-                                <td colspan="2" style="height:10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <td colspan="2" style="height:10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                    <asp:Button ID="btnAdd" runat="server"  OnClick="btnAdd_Click" Text="Add" CssClass="btnAdd" />
                                     &nbsp;&nbsp;
                                     <asp:Button ID="btnView" runat="server"  Text="View" CssClass="btnView" Width="119px" OnClick="btnView_Click" />
@@ -227,16 +224,7 @@
 
                                 </td>
                                 <td class="auto-style16" style="border: thin outset #3498DB">
-                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" Width="250px">
-                                        <Columns>
-                                            <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
-                                            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                                            <asp:BoundField DataField="DateOfBirth" HeaderText="DateOfBirth" SortExpression="DateOfBirth" />
-                                            <asp:BoundField DataField="Sex" HeaderText="Sex" SortExpression="Sex" />
-                                            <asp:BoundField DataField="Phone" HeaderText="Phone" SortExpression="Phone" />
-                                            <asp:BoundField DataField="Image" HeaderText="Image" SortExpression="Image" />
-                                        </Columns>
-                                    </asp:GridView>    
+                                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:defaultconnection %>" SelectCommand="SELECT * FROM [Employee]"></asp:SqlDataSource>
                                     <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:defaultconnection %>" SelectCommand="SELECT * FROM [Employee]"></asp:SqlDataSource>--%>
                                 </td>
                             </tr>
