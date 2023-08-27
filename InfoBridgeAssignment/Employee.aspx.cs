@@ -51,10 +51,11 @@ namespace InfoBridgeAssignment
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             int id=int.Parse(txtId.Text);
-            string name = txtName.Text, sex = drpSex.Text, phone = txtPhone.Text,dateofbirth=txtDateOfBirth.Text,
-            image = FileUpload1.FileName;
+            string name = txtName.Text, sex = drpSex.Text, phone = txtPhone.Text, dateofbirth = txtDateOfBirth.Text;
+            string image =Path.GetFileName( FileUpload1.FileName);
+            FileUpload1.SaveAs(Server.MapPath("EmployeeImg/") + image);
             //DateTime dateofbirth=DateTime.Parse(txtDateOfBirth.Text);
-            con.Open();
+                       con.Open();
             SqlCommand cmd = new SqlCommand("Insert into Employee values" +
             "('" + id + "','" + name + "', '" + dateofbirth + "','" + sex + "','" + phone + "','" + image + "')",con);
             cmd.ExecuteNonQuery();

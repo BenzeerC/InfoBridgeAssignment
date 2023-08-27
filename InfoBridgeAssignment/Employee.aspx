@@ -175,7 +175,7 @@
                                     
                                 </td>
                                 <td class="auto-style6" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF">
-                                    <asp:TextBox ID="txtDateOfBirth" runat="server" Type="date" Width="147px" Height="17px"></asp:TextBox>
+                                    <asp:TextBox ID="txtDateOfBirth" runat="server" Type="date"  Width="147px" Height="17px" TextMode="Date"></asp:TextBox>
                                     <%--<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/calander.jpg" ImageAlign="AbsBottom" Height="22px" Width="25px" onclick="ImageButton1_Click" />--%><%--<asp:Calendar ID="Calendar1" runat="server" Height="200px" Width="220px" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="#003399" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender">
                                         <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
                                         <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
@@ -211,8 +211,28 @@
                                 <td width="30%" class="auto-style15" style="border: thin outset #3498DB" colspan="2">
 
                                    
-                                    <asp:GridView ID="GridView1" runat="server" ForeColor="White" Width="768px" BackColor="#999999">
+                                    <asp:GridView ID="GridView1" runat="server"  ForeColor="White" Width="768px" BackColor="#999999" AutoGenerateColumns="False" HorizontalAlign="Center">
+                                        <Columns>
+                                            <asp:BoundField DataField="Id" HeaderText="Id" />
+                                            <asp:BoundField DataField="Name" HeaderText="Name" />
+                                            <asp:BoundField DataField="Sex" HeaderText="Sex" />
+                                            <%--<asp:BoundField DataField="DateOfBirth" HeaderText="Date Of Birth" />--%>
+                                            <asp:TemplateField HeaderText="Date Of Birth">
+                                            <ItemTemplate >
+                                                <asp:Label Id="labl" runat="server" DataFormateString="{0:dd/MM/yyyy}" HtmlEncode="false"
+                                                    Text='<%#Eval("DateOfBirth","{0:dd/MM/yyyy}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                                </asp:TemplateField>
+                                            <asp:BoundField DataField="Phone" HeaderText="Phone" />
+                                            <asp:TemplateField HeaderText="Photo">
+                                                <ItemTemplate>
+                                                    <img src="EmployeeImg/<%#Eval("Image") %>" style="width:80px;height:100px" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                        <EditRowStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                                         <HeaderStyle BackColor="#3366FF" />
+                                        <PagerStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                                     </asp:GridView>
                                 </td>
                                 <%--<td class="auto-style16" style="border: thin outset #3498DB">
