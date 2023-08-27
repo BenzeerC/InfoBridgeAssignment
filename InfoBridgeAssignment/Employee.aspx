@@ -103,11 +103,7 @@
         .auto-style15 {
             height: 100px;
         }
-        .auto-style16 {
-            width: 74%;
-            height: 100px;
-        }
-       
+               
         .auto-style17 {
             width: 16%;
         }
@@ -123,11 +119,11 @@
                     <td ;valign="top" class="auto-style1">
                         <table style="border:1px solid #3498DB;" class="auto-style4">
                             <tr>
-                                <td colspan="3" style="background-color:#3498DB;text-align:center;color:white;
+                                <td colspan="2" style="background-color:#3498DB;text-align:center;color:white;
                                    font-size:24px;font-weight:bold;height:50px;">Employee Form</td>
                             </tr>
                             <tr>
-                                <td colspan="3" style="height:10px">
+                                <td colspan="2" style="height:10px">
                                     <asp:Label ID="lblMessage" runat="server" ForeColor="#CC0000"></asp:Label>
                                     <asp:Label ID="lblId" runat="server" Visible="False"></asp:Label>
                                 </td>
@@ -136,7 +132,7 @@
                                 <td width="30%" class="tdLable" >
                                    <asp:Label runat="server"> Id :   <span style="color:red;">*</span>                             </asp:Label>
                                        </td>
-                                <td class="auto-style2" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF; border-top-style: groove; border-top-width: medium; border-top-color: #FFFFFF;" colspan="2">
+                                <td class="auto-style2" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF; border-top-style: groove; border-top-width: medium; border-top-color: #FFFFFF;">
                                     <asp:TextBox ID="txtId" runat="server" Width="253px" ></asp:TextBox>
                                 </td>
                             </tr>
@@ -144,7 +140,7 @@
                                 <td width="30%" class="tdLable">
                                     Name :<span style="color:red;">*</span>
                                 </td>
-                                <td class="auto-style8" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF" colspan="2">
+                                <td class="auto-style8" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF">
                                     <asp:TextBox ID="txtName" runat="server" Width="252px" ></asp:TextBox>
                                 </td>
                             </tr>
@@ -154,7 +150,7 @@
                                     Sex :<span style="color:red;">*</span>
                                     
                                 </td>
-                                <td class="auto-style8" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF" colspan="2">
+                                <td class="auto-style8" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF">
                                     <asp:DropDownList ID="drpSex" runat="server">
                                         <asp:ListItem Text="--Select Gender--" ></asp:ListItem>
                                         <asp:ListItem Value="Male" Text="Male" ></asp:ListItem>
@@ -169,7 +165,7 @@
                                     Phone :<span style="color:red;">*</span>
                                     
                                 </td>
-                                <td class="auto-style12" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF" colspan="2">
+                                <td class="auto-style12" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF">
                                     <asp:TextBox ID="txtPhone" runat="server" Width="251px" ></asp:TextBox>
                                 </td>
                                 </tr>
@@ -178,7 +174,7 @@
                                     Date Of Birth :<span style="color:red;">*</span>
                                     
                                 </td>
-                                <td class="auto-style6" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF" colspan="2">
+                                <td class="auto-style6" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF">
                                     <asp:TextBox ID="txtDateOfBirth" runat="server" Type="date" Width="147px" Height="17px"></asp:TextBox>
                                     <%--<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/calander.jpg" ImageAlign="AbsBottom" Height="22px" Width="25px" onclick="ImageButton1_Click" />--%><%--<asp:Calendar ID="Calendar1" runat="server" Height="200px" Width="220px" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="#003399" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender">
                                         <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
@@ -197,13 +193,13 @@
                                     Photo :<span style="color:red;">*</span>
                                     
                                 </td>
-                                <td class="auto-style14" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF; border-bottom-style: groove; border-bottom-width: medium; border-bottom-color: #FFFFFF;" colspan="2">
+                                <td class="auto-style14" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF; border-bottom-style: groove; border-bottom-width: medium; border-bottom-color: #FFFFFF;">
                                     <asp:FileUpload ID="FileUpload1" runat="server" onchange="ImagePreview(this);"/>
                                 &nbsp;&nbsp;
                                     </td>
                                 </tr>
                             <tr>
-                                <td colspan="3" style="height:10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <td colspan="2" style="height:10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                    <asp:Button ID="btnAdd" runat="server"  OnClick="btnAdd_Click" Text="Add" CssClass="btnAdd" />
                                     <asp:Button ID="btnView" runat="server"  Text="View" CssClass="btnView" Width="119px" OnClick="btnView_Click" />
                                    <asp:Button ID="btnEdit" runat="server"  Text="Edit" CssClass="btnEdit" OnClick="btnEdit_Click"  />
@@ -212,27 +208,15 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td width="30%" class="auto-style15" style="border: thin outset #3498DB">
+                                <td width="30%" class="auto-style15" style="border: thin outset #3498DB" colspan="2">
 
-                                    &nbsp;</td>
-                                <td class="auto-style16" style="border: thin outset #3498DB">
-                                    <asp:GridView ID="dgViewEmployee" runat="server" AutoGenerateColumns="False" Width="331px" Height="177px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"  BorderColor="#0066FF" BorderStyle="Groove" ForeColor="White" HorizontalAlign="Center" PageSize="5">
-                                        <Columns>
-                                            <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
-                                            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                                            <asp:BoundField DataField="DateOfBirth" HeaderText="DateOfBirth" SortExpression="DateOfBirth" DataFormatString="{0:dd/MM/yyyy}" />
-                                            <asp:BoundField DataField="Sex" HeaderText="Sex" SortExpression="Sex" />
-                                            <asp:BoundField DataField="Phone" HeaderText="Phone" SortExpression="Phone" />
-                                            <asp:BoundField DataField="Image" HeaderText="Image" SortExpression="Image" />
-                                        </Columns>
+                                   
+                                    <asp:GridView ID="GridView1" runat="server" ForeColor="White" Width="768px" BackColor="#999999">
                                         <HeaderStyle BackColor="#3366FF" />
-                                        <PagerStyle BackColor="#333333" BorderStyle="Groove" />
-                                        <RowStyle BackColor="#666666" />
-                                    </asp:GridView>    
-                                    <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:defaultconnection %>" SelectCommand="SELECT * FROM [Employee]"></asp:SqlDataSource>--%>
+                                    </asp:GridView>
                                 </td>
-                                <td class="auto-style16" style="border: thin outset #3498DB">
-                                    &nbsp;</td>
+                                <%--<td class="auto-style16" style="border: thin outset #3498DB">
+                                    &nbsp;</td>--%>
                             </tr>
                             
                         </table>

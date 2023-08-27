@@ -70,8 +70,8 @@ namespace InfoBridgeAssignment
             SqlDataAdapter da= new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
-            dgViewEmployee.DataSource = dt;
-            dgViewEmployee.DataBind();
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
         }
         
 
@@ -83,8 +83,8 @@ namespace InfoBridgeAssignment
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
-            dgViewEmployee.DataSource = dt;
-            dgViewEmployee.DataBind();
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
 
 
         }

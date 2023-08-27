@@ -22,7 +22,7 @@ namespace InfoBridgeAssignment
             }
             else
             {
-                lblErorr.Text = "User name or Password is wrong";
+                lblErorr.Text = "*User name or Password is incorrect";
             }
         }
     }

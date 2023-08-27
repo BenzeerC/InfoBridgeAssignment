@@ -29,31 +29,17 @@
             font-size:16px;
            margin-right:30px;
            
+           
         }
           .auto-style1 {
             text-align: center;
         }
-          .auto-style2 {
-            width: 20%;
-        }
-        .auto-style3 {
+          .auto-style3 {
             width: 28%;
             height: 229px;
         }
         .auto-style4 {
             width: 22%;
-        }
-        .auto-style5 {
-            width: 24%;
-        }
-          .auto-style9 {
-            text-align: left;
-            font-family: Calibri;
-            font-size: 20px;
-            font-weight: bold;
-            margin-left: 25px;
-            border: medium groove #3498DB;
-            width: 215px;
         }
           .auto-style10 {
             border-style: none;
@@ -69,65 +55,63 @@
             margin-right: 30px;
             font-weight: bold;
         }
+          .auto-style12 {
+            text-align: left;
+        }
           </style>
 </head>
     <body style="height: 500px">
 <form id="form1" runat="server">
-         <table style="background-color:#D3D3D3;" class="auto-style3" align="center">
+<table style="background-color:#D3D3D3;" class="auto-style3" align="center">
                 <tr class="auto-style1">
-                    <td class="auto-style5" style="background-color: #FFFFFF" >
+                    <td style="background-color: #FFFFFF" >
                        <%-- <asp:Image ID="Image1" runat="server" ImageUrl="https://in.images.search.yahoo.com/images/view;_ylt=AwrKC0KX9elk8M4x5h29HAx.
                            ;_ylu=c2VjA3NyBHNsawNpbWcEb2lk--%><%--AzA3YzJjMzY0ZWVhYWMzNzgwMzMxODcxMmUwOTFmMTgzBGdwb3MDMTQEaXQDYmluZw--?back=https%3A%2F%2Fin.images.search.yahoo.com%2Fsearch%2Fimages%3Fp%3Dlogin%2Bimage%2Bicon%26type%3DE211IN714G0%26fr%3Dmcafee%26fr2%3Dpiv-web%26tab%3Dorganic%26ri%3D14&amp;w=474&amp;h=474&amp;imgurl=www.clker.com%2Fcliparts%2Fy%2Fo%2FN%2FR%2FL%2Ff%2Flogin-blue-hi.png&amp;rurl=http%3A%2F%2Fwww.clker.com%2Fclipart-login-blue-1.html&amp;size=43.9KB&amp;p=login+image+icon&amp;oid=07c2c364eeaac37803318712e091f183&amp;fr2=piv-web&amp;fr=mcafee&amp;tt=Login+Blue+Clip+Art+at+Clker.com+-+vector+clip+art+online%2C+royalty+free+...&amp;b=0&amp;ni=21&amp;no=14&amp;ts=&amp;tab=organic&amp;sigr=d3bhZYQ1LK7h&amp;sigb=cpkFqK0YeRDz&amp;sigi=2I3lxJylSwga&amp;sigt=7zhVFh10cDGz&amp;.crumb=9XJARxzANOI&amp;fr=mcafee&amp;fr2=piv-web&amp;type=E211IN714G0" />
                     </td>--%>
                         <asp:Image ID="Image1" runat="server" Height="120px" ImageUrl="https://tse3.mm.bing.net/th?id=OIP.bDZo3bdme5t7LF1uhyZ7_gHaHa&amp;pid=Api&amp;P=0&amp;h=180" Width="128px" />
-                        </td>
-                    <td valign="top" class="auto-style1">
-                        <table style="border:1px solid #3498DB;" class="auto-style4">
+                        <table style="border:1px solid #3498DB;" class="auto-style4" align="center">
                             <tr>
-                                <td colspan="2" style="background-color:#3498DB;text-align:center;color:white;
-                                   font-size:24px;font-weight:bold;height:50px; " >Login</td>
+                                <td style="background-color:#3498DB;color:white;
+                                   font-size:24px;font-weight:bold;height:50px; " class="auto-style12" >Login</td>
                             </tr>
                              <tr>
-                                <td colspan="2" style="height:10px"></td>
+                                
+                                <td style="height:10px" class="auto-style12">
+                                    <asp:Label ID="lblErorr" runat="server" ForeColor="Red"></asp:Label>
+                                 </td>
                             </tr>
                             <tr>
-                                <td class="auto-style9">
+                                <td class="tdLable">
                                     Username :<span style="color:red;">*</span>
-                                </td>
-                                <td class="auto-style2" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF; border-top-style: groove; border-top-width: medium; border-top-color: #FFFFFF;">
                                     <asp:TextBox ID="txtUserName" runat="server" Width="253px" ></asp:TextBox>
                                 </td>
+                              
                                 </tr>
                              <tr>
-                                <td class="auto-style9">
+                                <td class="tdLable">
                                     Password :<span style="color:red;">*</span>
-                                </td>
-                                <td class="auto-style2" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF; border-top-style: groove; border-top-width: medium; border-top-color: #FFFFFF;">
                                     <asp:TextBox ID="txtPassword" runat="server" Width="253px" TextMode="Password" ></asp:TextBox>
                                 </td>
+                               
                                 </tr>
-                              <%--<td class="auto-style6" <td class="auto-style16" > 
-                                  &nbsp;--%><asp:Label ID="lblErorr" runat="server" ForeColor="Red"></asp:Label>
-                <%--</td>--%>    
-                            <td class="auto-style9" style="background-color: #4CAF50">
-                                   <%--<asp:Button ID="btnLogin" runat="server"  OnClick="btnLogin_Click" Text="Login" CssClass="btnLogin" Width="108px" />--%>
-                          
+                             
+                            <td class="tdLable" style="background-color: #808080 colspan="2">
+                                   
                                    <strong>
                           
-                                   <asp:Button ID="btnLogin" runat="server"  OnClick="btnLogin_Click" Text="Login" CssClass="auto-style10" Width="128px" Height="57px" />
+                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          
+                                   <asp:Button ID="btnLogin" runat="server"  OnClick="btnLogin_Click" Text="Login" CssClass="auto-style10" Width="137px" Height="54px" />
                           
                                    </strong>
                           
-                            </td>
-                            <td class="auto-style7">
-                                   <asp:Image ID="Image2" runat="server" Height="47px" ImageUrl="https://tse4.mm.bing.net/th?id=OIP.HCIUmwE47DnoMQ22KaaoVwAAAA&amp;pid=Api&amp;P=0&amp;h=180" Width="68px" />
                             </td>
                             
                             
                             </tr>
                       </table>
     
-                    </td>
+                        </td>
                 </tr>
             </table>
         </form>
