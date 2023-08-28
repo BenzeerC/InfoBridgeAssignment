@@ -9,18 +9,22 @@ using System.Web.UI;
 using System.Web;
 using System.Xml.Linq;
 
+
 namespace InfoBridgeAssignment
 {
     public partial class Employee : System.Web.UI.Page
     {
-
-
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\Practice\InfoBridgeAssignment\InfoBridgeAssignment\App_Data\Mydatabase.mdf;Integrated Security=True";
-
         SqlConnection con;
         SqlCommand cmd;
         SqlDataReader dr;
 
+        public Employee()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["defaultconnection"].ConnectionString;
+            con= new SqlConnection(connectionString);
+        }
+
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -29,14 +33,8 @@ namespace InfoBridgeAssignment
             }
         }
 
-        //SqlConnection con = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\Practice\\InfoBridgeAssignment\\InfoBridgeAssignment\\App_Data\\Mydatabase.mdf;Integrated Security=True");
-
-
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-        //Clear data
+       
+        //Clear form
         public void Clear_All()
         {
             txtId.Text = "";
@@ -56,7 +54,7 @@ namespace InfoBridgeAssignment
         {
             try
             {
-                con = new SqlConnection(connectionString);
+               
                 int id = int.Parse(txtId.Text);
                 string name = txtName.Text, sex = drpSex.Text, phone = txtPhone.Text,address=txtAddress.Text, dateofbirth = txtDateOfBirth.Text;
                 string image = Path.GetFileName(FileUpload1.FileName);
@@ -86,10 +84,11 @@ namespace InfoBridgeAssignment
                 MessageBox.Show(ex.Message);
             }
         }
+        
         //view all employee
         void GetEmployeeList()
         { 
-            con = new SqlConnection(connectionString);
+          
             string qry = "Select * from Employee";
             cmd= new SqlCommand(qry,con);
             con.Open() ;
@@ -105,7 +104,7 @@ namespace InfoBridgeAssignment
         {
             try
             {
-                con = new SqlConnection(connectionString);
+               
                 int id = int.Parse(txtId.Text);
                 string qry = "Select * from Employee Where @Id=id";
                 cmd = new SqlCommand(qry, con);
@@ -125,7 +124,7 @@ namespace InfoBridgeAssignment
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             try { 
-            con = new SqlConnection(connectionString);
+       
             int id = int.Parse(txtId.Text);
             string name = txtName.Text, sex = drpSex.Text, phone = txtPhone.Text,address=txtAddress.Text, dateofbirth = txtDateOfBirth.Text,
             image = FileUpload1.FileName;
@@ -151,12 +150,13 @@ namespace InfoBridgeAssignment
                 MessageBox.Show(ex.Message + "Error");
             }
         }
+        
         //Delete by Id
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                con = new SqlConnection(connectionString);
+                
                 int id = int.Parse(txtId.Text);
                 string qry = "Delete Employee Where @Id=id";
                 cmd = new SqlCommand(qry, con);
