@@ -188,6 +188,15 @@
                                </asp:Calendar>--%>
                                         </td>
                                 </tr>
+                            <tr>
+                                <td width="30%" class="tdLable">
+                                    Address :<span style="color:red;">*</span>
+                                    
+                                </td>
+                                <td class="auto-style6" style="border-right-style: groove; border-right-width: medium; border-right-color: #FFFFFF">
+                                    <asp:TextBox ID="txtAddress" runat="server" Width="252px" ></asp:TextBox>
+                                        </td>
+                                </tr>
                              <tr>
                                 <td width="30%" class="tdLable">
                                     Photo :<span style="color:red;">*</span>
@@ -224,9 +233,10 @@
                                             </ItemTemplate>
                                                 </asp:TemplateField>
                                             <asp:BoundField DataField="Phone" HeaderText="Phone" />
+                                            <asp:BoundField DataField="Address" HeaderText="Address" />
                                             <asp:TemplateField HeaderText="Photo">
                                                 <ItemTemplate>
-                                                    <img src="EmployeeImg/<%#Eval("Image") %>" style="width:80px;height:100px" />
+                                                    <img src="EmployeeImg/<%#Eval("Image") %>" style="width:100px;height:100px" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         </Columns>
@@ -235,8 +245,7 @@
                                         <PagerStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                                     </asp:GridView>
                                 </td>
-                                <%--<td class="auto-style16" style="border: thin outset #3498DB">
-                                    &nbsp;</td>--%>
+                                <%--<asp:BoundField DataField="DateOfBirth" HeaderText="Date Of Birth" />--%>
                             </tr>
                             
                         </table>

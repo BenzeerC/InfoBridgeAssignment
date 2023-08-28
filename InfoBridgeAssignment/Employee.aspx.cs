@@ -44,6 +44,7 @@ namespace InfoBridgeAssignment
             drpSex.SelectedValue = drpSex.Items[0].ToString();
             txtPhone.Text = "";
             txtDateOfBirth.Text = DateTime.Today.Date.ToString();
+            txtAddress.Text = "";
             lblMessage.Text = "";
         }
 
@@ -57,11 +58,11 @@ namespace InfoBridgeAssignment
             {
                 con = new SqlConnection(connectionString);
                 int id = int.Parse(txtId.Text);
-                string name = txtName.Text, sex = drpSex.Text, phone = txtPhone.Text, dateofbirth = txtDateOfBirth.Text;
+                string name = txtName.Text, sex = drpSex.Text, phone = txtPhone.Text,address=txtAddress.Text, dateofbirth = txtDateOfBirth.Text;
                 string image = Path.GetFileName(FileUpload1.FileName);
                 FileUpload1.SaveAs(Server.MapPath("EmployeeImg/") + image);
                 
-                string qry = "Insert into Employee values(@Id,@Name,@DateOfBirth,@Sex,@Phone,@Image)";
+                string qry = "Insert into Employee values(@Id,@Name,@DateOfBirth,@Sex,@Phone,@Address,@Image)";
                 cmd = new SqlCommand(qry, con);
                 
                 cmd.Parameters.AddWithValue("@Id", id);
@@ -69,6 +70,7 @@ namespace InfoBridgeAssignment
                 cmd.Parameters.AddWithValue("@DateOfBirth", dateofbirth);
                 cmd.Parameters.AddWithValue("@Sex", sex);
                 cmd.Parameters.AddWithValue("@Phone", phone);
+                cmd.Parameters.AddWithValue("@Address", address);
                 cmd.Parameters.AddWithValue("@Image", image);
                 con.Open();
                 
@@ -125,14 +127,15 @@ namespace InfoBridgeAssignment
             try { 
             con = new SqlConnection(connectionString);
             int id = int.Parse(txtId.Text);
-            string name = txtName.Text, sex = drpSex.Text, phone = txtPhone.Text, dateofbirth = txtDateOfBirth.Text,
+            string name = txtName.Text, sex = drpSex.Text, phone = txtPhone.Text,address=txtAddress.Text, dateofbirth = txtDateOfBirth.Text,
             image = FileUpload1.FileName;
-            string qry = "Update Employee set name=@Name,dateofbirth=@DateOfBirth,sex=@Sex,phone=@Phone,image=@Image where @Id=id";
+            string qry = "Update Employee set name=@Name,dateofbirth=@DateOfBirth,sex=@Sex,phone=@Phone,address=@address,image=@Image where @Id=id";
             cmd = new SqlCommand(qry, con);
                 cmd.Parameters.AddWithValue("@Name", name);
                 cmd.Parameters.AddWithValue("@DateOfBirth", dateofbirth);
                 cmd.Parameters.AddWithValue("@Sex", sex);
                 cmd.Parameters.AddWithValue("@Phone", phone);
+                cmd.Parameters.AddWithValue("@Address", address);
                 cmd.Parameters.AddWithValue("@Image", image);
                 cmd.Parameters.AddWithValue("@Id", id);
                 con.Open();
