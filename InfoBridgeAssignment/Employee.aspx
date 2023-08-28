@@ -199,7 +199,7 @@
                                     </td>
                                 </tr>
                             <tr>
-                                <td colspan="2" style="height:10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <td colspan="2" style="height:10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                    <asp:Button ID="btnAdd" runat="server"  OnClick="btnAdd_Click" Text="Add" CssClass="btnAdd" />
                                     <asp:Button ID="btnView" runat="server"  Text="View" CssClass="btnView" Width="119px" OnClick="btnView_Click" />
                                    <asp:Button ID="btnEdit" runat="server"  Text="Edit" CssClass="btnEdit" OnClick="btnEdit_Click"  />
